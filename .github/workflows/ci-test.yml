@@ -35,3 +35,9 @@ jobs:
         curl -X POST -H 'Content-type: application/json' \
         --data "{\"text\":\"Linting completed with errors: \n${lint_errors}\"}" \
         ${{ secrets.SLACK_WEBHOOK_URL }}
+        
+    - name: Run tests
+      run: |
+        pip install pytest
+        pytest
+        
