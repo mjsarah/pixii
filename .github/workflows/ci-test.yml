@@ -52,16 +52,4 @@ jobs:
         --data "{\"text\":\"Testing completed with errors: \n${test_errors}\"}" \
         ${{ secrets.SLACK_WEBHOOK_URL }}
 
-    - name: Upload linting errors artifact
-      if: failure() # Upload artifact only if linting fails
-      uses: actions/upload-artifact@v3
-      with:
-        name: linting-errors
-        path: flake8_errors.txt
-
-    - name: Upload testing errors artifact
-      if: failure() # Upload artifact only if testing fails
-      uses: actions/upload-artifact@v3
-      with:
-        name: testing-errors
-        path: pytest_output.txt
+  
