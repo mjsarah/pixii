@@ -26,6 +26,12 @@ jobs:
       run: |
         pip install flake8
         python scripts/lint_script.py
+        
+    - name: Run tests
+      run: |
+        pip install pytest
+        pytest
+
     - name: Notify Slack about Linting Errors
       if: always()
       run: |
