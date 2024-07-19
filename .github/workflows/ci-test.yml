@@ -22,3 +22,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Lint code
+      run: |
+        pip install flake8
+        python scripts/lint_script.py
+    - name: Notify Slack about Linting Errors
+      if: always()
+      run: |
+        lint_errors=$(cat flake8_errors.txt)
+        curl -X POST -H 'Content-type: application/json' \
+        --data "{\"text\":\"Linting completed with errors: \n${lint_errors}\"}" \
+        ${{ secrets.SLACK_WEBHOOK_URL }}
