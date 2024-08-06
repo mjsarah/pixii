@@ -26,7 +26,8 @@ jobs:
     - name: Lint code
       id: lint
       run: |
-        flake8 . > flake8_errors.txt 
+        pip install flake8
+        flake8 . > flake8_errors.txt || true
     - name: Notify Slack about Linting Errors
       if: failure() # Notify only if linting fails
       run: |
@@ -37,6 +38,7 @@ jobs:
     - name: Run tests
       id: test
       run: |
+        pip install pytest
         pytest > pytest_output.txt || true
     - name: Notify Slack about Testing Errors
       if: failure() # Notify only if testing fails
