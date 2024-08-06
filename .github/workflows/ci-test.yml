@@ -26,6 +26,7 @@ jobs:
     - name: Lint code
       id: lint
       run: |
+        pip  install flake8
         flake8 . > flake8_errors.txt 
     - name: Notify Slack about Linting Errors
       if: failure() # Notify only if linting fails
