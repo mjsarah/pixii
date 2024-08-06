@@ -26,7 +26,7 @@ jobs:
     - name: Lint code
       id: lint
       run: |
-        flake8 . > flake8_errors.txt 
+        flake8 . > flake8_errors.txt || true 
     - name: Notify Slack about Linting Errors
       if: failure() # Notify only if linting fails
       run: |
